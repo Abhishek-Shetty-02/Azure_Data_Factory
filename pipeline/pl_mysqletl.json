@@ -1,0 +1,61 @@
+{
+	"name": "pl_mysqletl",
+	"properties": {
+		"activities": [
+			{
+				"name": "bronzelayer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "silverlayer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "bronzelayer",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "goldlayer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "silverlayer",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			}
+		],
+		"annotations": []
+	}
+}
