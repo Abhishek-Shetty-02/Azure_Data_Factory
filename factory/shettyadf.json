@@ -1,0 +1,9 @@
+{
+	"name": "shettyadf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6295eaa2-040a-46d3-b69b-d64a5e22c941",
+		"tenantId": "75de6951-7ded-4dae-aca1-b8b27ab44109"
+	}
+}
