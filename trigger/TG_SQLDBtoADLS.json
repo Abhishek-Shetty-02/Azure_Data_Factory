@@ -1,0 +1,29 @@
+{
+	"name": "TG_SQLDBtoADLS",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_sqldbtoadls",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"SchemaName": "SchemaName",
+					"TableName": "TableName"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 60,
+				"startTime": "2025-11-03T12:00:00",
+				"endTime": "2025-11-05T14:00:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
