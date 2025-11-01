@@ -1,0 +1,16 @@
+{
+	"name": "Ds_Sqlserver",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_Sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SaleLT",
+			"table": "Product"
+		}
+	}
+}
