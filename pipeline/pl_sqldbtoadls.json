@@ -23,7 +23,8 @@
 					"dataset": {
 						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -39,6 +40,11 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Copy data1",
@@ -98,7 +104,17 @@
 							"outputs": [
 								{
 									"referenceName": "Sink",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Sink_path": {
+											"value": "@item().SchemaName",
+											"type": "Expression"
+										},
+										"Sink_file": {
+											"value": "@item().TableName",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
