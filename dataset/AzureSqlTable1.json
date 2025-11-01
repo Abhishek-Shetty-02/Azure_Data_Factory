@@ -1,0 +1,57 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SchemaName": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SchemaName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TableName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FilePath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FileName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "isActive",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
