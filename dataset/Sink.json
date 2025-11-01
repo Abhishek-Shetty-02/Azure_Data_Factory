@@ -23,7 +23,7 @@
 					"type": "Expression"
 				},
 				"fileSystem": {
-					"value": "@dataset().Sink_path",
+					"value": "@{toLower(dataset().Sink_path)}",
 					"type": "Expression"
 				}
 			},
