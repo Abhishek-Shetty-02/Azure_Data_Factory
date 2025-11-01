@@ -6,10 +6,10 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"SchemaName": {
+			"Sink_path": {
 				"type": "string"
 			},
-			"TableName": {
+			"Sink_file": {
 				"type": "string"
 			}
 		},
@@ -18,7 +18,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "destination"
+				"fileName": {
+					"value": "@dataset().Sink_file",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().Sink_path",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
