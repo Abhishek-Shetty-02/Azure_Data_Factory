@@ -24,7 +24,8 @@
 					"dataset": {
 						"referenceName": "Ds_Sqlserver",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": true
 				}
 			},
 			{
@@ -41,7 +42,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Lookup1').output.value",
+						"value": "@activity('Lookup1').output",
 						"type": "Expression"
 					},
 					"isSequential": true,
