@@ -11,6 +11,18 @@
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
+		"Ls_Blob_connectionString": {
+			"value": ""
+		},
+		"Ls_SQLDB_IL_password": {
+			"value": ""
+		},
+		"Ls_SQLDbtoBLOB_IL_connectionString": {
+			"value": ""
+		},
+		"Ls_Sqlserver_password": {
+			"value": ""
+		},
 		"ls_AzureSqlDatabase_password": {
 			"value": ""
 		},
@@ -19,6 +31,24 @@
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://abhishekshettysa.dfs.core.windows.net/"
+		},
+		"Ls_SQLDB_IL_properties_typeProperties_server": {
+			"value": "shettyserver.database.windows.net"
+		},
+		"Ls_SQLDB_IL_properties_typeProperties_database": {
+			"value": "Shettydb"
+		},
+		"Ls_SQLDB_IL_properties_typeProperties_userName": {
+			"value": "shetty"
+		},
+		"Ls_Sqlserver_properties_typeProperties_server": {
+			"value": "shettyserver.database.windows.net"
+		},
+		"Ls_Sqlserver_properties_typeProperties_database": {
+			"value": "shettydb"
+		},
+		"Ls_Sqlserver_properties_typeProperties_userName": {
+			"value": "shetty"
 		},
 		"ls_AzureSqlDatabase_properties_typeProperties_server": {
 			"value": "shettyserver.database.windows.net"

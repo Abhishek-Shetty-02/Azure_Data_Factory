@@ -15,6 +15,22 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
+		"Ls_Blob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Ls_Blob'"
+		},
+		"Ls_SQLDB_IL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Ls_SQLDB_IL'"
+		},
+		"Ls_SQLDbtoBLOB_IL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Ls_SQLDbtoBLOB_IL'"
+		},
+		"Ls_Sqlserver_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Ls_Sqlserver'"
+		},
 		"ls_AzureSqlDatabase_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_AzureSqlDatabase'"
@@ -26,6 +42,30 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://abhishekshettysa.dfs.core.windows.net/"
+		},
+		"Ls_SQLDB_IL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "shettyserver.database.windows.net"
+		},
+		"Ls_SQLDB_IL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Shettydb"
+		},
+		"Ls_SQLDB_IL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "shetty"
+		},
+		"Ls_Sqlserver_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "shettyserver.database.windows.net"
+		},
+		"Ls_Sqlserver_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "shettydb"
+		},
+		"Ls_Sqlserver_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "shetty"
 		},
 		"ls_AzureSqlDatabase_properties_typeProperties_server": {
 			"type": "string",
@@ -92,6 +132,18 @@
 					"AzureDataLakeStorage1_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					},
+					"Ls_Blob_connectionString": {
+						"value": "[parameters('Ls_Blob_connectionString')]"
+					},
+					"Ls_SQLDB_IL_password": {
+						"value": "[parameters('Ls_SQLDB_IL_password')]"
+					},
+					"Ls_SQLDbtoBLOB_IL_connectionString": {
+						"value": "[parameters('Ls_SQLDbtoBLOB_IL_connectionString')]"
+					},
+					"Ls_Sqlserver_password": {
+						"value": "[parameters('Ls_Sqlserver_password')]"
+					},
 					"ls_AzureSqlDatabase_password": {
 						"value": "[parameters('ls_AzureSqlDatabase_password')]"
 					},
@@ -100,6 +152,24 @@
 					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"Ls_SQLDB_IL_properties_typeProperties_server": {
+						"value": "[parameters('Ls_SQLDB_IL_properties_typeProperties_server')]"
+					},
+					"Ls_SQLDB_IL_properties_typeProperties_database": {
+						"value": "[parameters('Ls_SQLDB_IL_properties_typeProperties_database')]"
+					},
+					"Ls_SQLDB_IL_properties_typeProperties_userName": {
+						"value": "[parameters('Ls_SQLDB_IL_properties_typeProperties_userName')]"
+					},
+					"Ls_Sqlserver_properties_typeProperties_server": {
+						"value": "[parameters('Ls_Sqlserver_properties_typeProperties_server')]"
+					},
+					"Ls_Sqlserver_properties_typeProperties_database": {
+						"value": "[parameters('Ls_Sqlserver_properties_typeProperties_database')]"
+					},
+					"Ls_Sqlserver_properties_typeProperties_userName": {
+						"value": "[parameters('Ls_Sqlserver_properties_typeProperties_userName')]"
 					},
 					"ls_AzureSqlDatabase_properties_typeProperties_server": {
 						"value": "[parameters('ls_AzureSqlDatabase_properties_typeProperties_server')]"
