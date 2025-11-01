@@ -37,6 +37,12 @@
 		},
 		"ls_AzureSqlDatabase2_properties_typeProperties_userName": {
 			"value": "shetty"
+		},
+		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName": {
+			"value": "SchemaName"
+		},
+		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName": {
+			"value": "TableName"
 		}
 	}
 }

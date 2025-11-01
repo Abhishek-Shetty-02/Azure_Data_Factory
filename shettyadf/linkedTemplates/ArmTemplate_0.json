@@ -50,6 +50,14 @@
 		"ls_AzureSqlDatabase2_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "shetty"
+		},
+		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName": {
+			"type": "string",
+			"defaultValue": "SchemaName"
+		},
+		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName": {
+			"type": "string",
+			"defaultValue": "TableName"
 		}
 	},
 	"variables": {
@@ -255,6 +263,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
+								"sqlReaderQuery": " Select * from dbo.SourceFileConfig where isActive=1",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -380,6 +389,40 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
 				"[concat(variables('factoryId'), '/datasets/Sink')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TG_SQLDBtoADLS')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_sqldbtoadls",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"SchemaName": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName')]",
+							"TableName": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 60,
+						"startTime": "2025-11-03T12:00:00",
+						"endTime": "2025-11-05T14:00:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_sqldbtoadls')]"
 			]
 		}
 	]

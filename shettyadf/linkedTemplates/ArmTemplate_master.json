@@ -51,6 +51,14 @@
 			"type": "string",
 			"defaultValue": "shetty"
 		},
+		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName": {
+			"type": "string",
+			"defaultValue": "SchemaName"
+		},
+		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName": {
+			"type": "string",
+			"defaultValue": "TableName"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -110,6 +118,12 @@
 					},
 					"ls_AzureSqlDatabase2_properties_typeProperties_userName": {
 						"value": "[parameters('ls_AzureSqlDatabase2_properties_typeProperties_userName')]"
+					},
+					"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName": {
+						"value": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName')]"
+					},
+					"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName": {
+						"value": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName')]"
 					}
 				}
 			},
