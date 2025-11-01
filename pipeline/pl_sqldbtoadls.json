@@ -22,7 +22,11 @@
 					},
 					"dataset": {
 						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "SourceFileConfig"
+						}
 					},
 					"firstRowOnly": false
 				}
@@ -122,6 +126,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"SchemaName": {
+				"type": "String"
+			},
+			"TableName": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
