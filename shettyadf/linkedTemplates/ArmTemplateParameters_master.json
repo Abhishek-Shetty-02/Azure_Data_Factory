@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "shettyadf"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"ls_AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"ls_AzureSqlDatabase2_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://abhishekshettysa.dfs.core.windows.net/"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "shettyserver.database.windows.net"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "Shettydb"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "shetty"
+		},
+		"ls_AzureSqlDatabase2_properties_typeProperties_server": {
+			"value": "shettyserver.database.windows.net"
+		},
+		"ls_AzureSqlDatabase2_properties_typeProperties_database": {
+			"value": "Shettydb"
+		},
+		"ls_AzureSqlDatabase2_properties_typeProperties_userName": {
+			"value": "shetty"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
