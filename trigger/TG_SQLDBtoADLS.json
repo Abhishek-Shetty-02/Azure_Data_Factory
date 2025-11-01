@@ -2,7 +2,7 @@
 	"name": "TG_SQLDBtoADLS",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
