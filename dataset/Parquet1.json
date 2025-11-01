@@ -1,17 +1,9 @@
 {
 	"name": "Parquet1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "Ls_SQLDbtoBLOB_IL",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
-			"location": {
-				"type": "AzureBlobStorageLocation",
-				"container": "dbo.Employee_Sink"
-			},
 			"compressionCodec": "snappy"
 		},
 		"schema": []
