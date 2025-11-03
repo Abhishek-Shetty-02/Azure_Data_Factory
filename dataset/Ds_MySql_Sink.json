@@ -6,13 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"raw_data": {
-				"type": "string"
-			},
-			"table_schema": {
-				"type": "string"
-			},
-			"table_name": {
+			"file_name": {
 				"type": "string"
 			}
 		},
@@ -22,11 +16,11 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().table_name",
+					"value": "@dataset().file_name",
 					"type": "Expression"
 				},
-				"folderPath": "sakila",
-				"fileSystem": "raw_data"
+				"folderPath": "csv",
+				"fileSystem": "rawdata"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
