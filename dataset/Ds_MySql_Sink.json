@@ -1,0 +1,38 @@
+{
+	"name": "Ds_MySql_Sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_MySql_Sink",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"raw_data": {
+				"type": "string"
+			},
+			"table_schema": {
+				"type": "string"
+			},
+			"table_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().table_name",
+					"type": "Expression"
+				},
+				"folderPath": "sakila",
+				"fileSystem": "raw_data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
