@@ -5,11 +5,6 @@
 			"referenceName": "Ls_MySql_Ingestion",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"TableName": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "MySqlTable",
 		"schema": [],
