@@ -29,6 +29,12 @@
 		"ls_AzureSqlDatabase2_password": {
 			"value": ""
 		},
+		"Ls_MySql_Ingestion_password": {
+			"value": ""
+		},
+		"Ls_MySql_Sink_accountKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://abhishekshettysa.dfs.core.windows.net/"
 		},
@@ -73,6 +79,18 @@
 		},
 		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName": {
 			"value": "TableName"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_database": {
+			"value": "sakila"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"Ls_MySql_Sink_properties_typeProperties_url": {
+			"value": "https://sakiladbprojectsa.dfs.core.windows.net/"
 		}
 	}
 }
