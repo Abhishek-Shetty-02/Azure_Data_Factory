@@ -1,0 +1,20 @@
+{
+	"name": "Ds_MySql_Ingestion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_MySql_Ingestion",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`ingestion_control`"
+		}
+	}
+}
