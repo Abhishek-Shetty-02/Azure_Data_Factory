@@ -15,9 +15,29 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
+		"AzureDataLakeStorage2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
 		"Ls_Blob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Ls_Blob'"
+		},
+		"Ls_MySql_Ingestion_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Ls_MySql_Ingestion'"
+		},
+		"Ls_MySql_Sink_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Ls_MySql_Sink'"
+		},
+		"Ls_Olympicpro_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Ls_Olympicpro'"
 		},
 		"Ls_SQLDB_IL_password": {
 			"type": "secureString",
@@ -39,17 +59,33 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_AzureSqlDatabase2'"
 		},
-		"Ls_MySql_Ingestion_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Ls_MySql_Ingestion'"
-		},
-		"Ls_MySql_Sink_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'Ls_MySql_Sink'"
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://abhishekshettysa.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://olympicsprojectsa.dfs.core.windows.net/"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sakila"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"Ls_MySql_Sink_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sakiladbprojectsa.dfs.core.windows.net/"
+		},
+		"Ls_Olympicpro_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://olympicsprojectsa.dfs.core.windows.net/"
 		},
 		"Ls_SQLDB_IL_properties_typeProperties_server": {
 			"type": "string",
@@ -107,22 +143,6 @@
 			"type": "string",
 			"defaultValue": "TableName"
 		},
-		"Ls_MySql_Ingestion_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "localhost"
-		},
-		"Ls_MySql_Ingestion_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "sakila"
-		},
-		"Ls_MySql_Ingestion_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "root"
-		},
-		"Ls_MySql_Sink_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sakiladbprojectsa.dfs.core.windows.net/"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -156,8 +176,20 @@
 					"AzureDataLakeStorage1_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					},
+					"AzureDataLakeStorage2_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+					},
+					"AzureDatabricks1_accessToken": {
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
 					"Ls_Blob_connectionString": {
 						"value": "[parameters('Ls_Blob_connectionString')]"
+					},
+					"Ls_MySql_Sink_accountKey": {
+						"value": "[parameters('Ls_MySql_Sink_accountKey')]"
+					},
+					"Ls_Olympicpro_accountKey": {
+						"value": "[parameters('Ls_Olympicpro_accountKey')]"
 					},
 					"Ls_SQLDB_IL_password": {
 						"value": "[parameters('Ls_SQLDB_IL_password')]"
@@ -174,14 +206,17 @@
 					"ls_AzureSqlDatabase2_password": {
 						"value": "[parameters('ls_AzureSqlDatabase2_password')]"
 					},
-					"Ls_MySql_Sink_accountKey": {
-						"value": "[parameters('Ls_MySql_Sink_accountKey')]"
-					},
-					"Ls_MySql_Ingestion_password": {
-						"value": "[parameters('Ls_MySql_Ingestion_password')]"
-					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage2_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]"
+					},
+					"Ls_MySql_Sink_properties_typeProperties_url": {
+						"value": "[parameters('Ls_MySql_Sink_properties_typeProperties_url')]"
+					},
+					"Ls_Olympicpro_properties_typeProperties_url": {
+						"value": "[parameters('Ls_Olympicpro_properties_typeProperties_url')]"
 					},
 					"Ls_SQLDB_IL_properties_typeProperties_server": {
 						"value": "[parameters('Ls_SQLDB_IL_properties_typeProperties_server')]"
@@ -218,18 +253,6 @@
 					},
 					"ls_AzureSqlDatabase2_properties_typeProperties_userName": {
 						"value": "[parameters('ls_AzureSqlDatabase2_properties_typeProperties_userName')]"
-					},
-					"Ls_MySql_Sink_properties_typeProperties_url": {
-						"value": "[parameters('Ls_MySql_Sink_properties_typeProperties_url')]"
-					},
-					"Ls_MySql_Ingestion_properties_typeProperties_server": {
-						"value": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_server')]"
-					},
-					"Ls_MySql_Ingestion_properties_typeProperties_database": {
-						"value": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_database')]"
-					},
-					"Ls_MySql_Ingestion_properties_typeProperties_username": {
-						"value": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_username')]"
 					}
 				}
 			},
@@ -248,6 +271,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Ls_MySql_Ingestion_password": {
+						"value": "[parameters('Ls_MySql_Ingestion_password')]"
+					},
+					"Ls_MySql_Ingestion_properties_typeProperties_server": {
+						"value": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_server')]"
+					},
+					"Ls_MySql_Ingestion_properties_typeProperties_database": {
+						"value": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_database')]"
+					},
+					"Ls_MySql_Ingestion_properties_typeProperties_username": {
+						"value": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_username')]"
 					},
 					"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName": {
 						"value": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName')]"

@@ -7,6 +7,22 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "shettyadf"
 		},
+		"Ls_MySql_Ingestion_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Ls_MySql_Ingestion'"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sakila"
+		},
+		"Ls_MySql_Ingestion_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
 		"TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName": {
 			"type": "string",
 			"defaultValue": "SchemaName"
@@ -20,6 +36,171 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Sink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Sink_path": {
+						"type": "string"
+					},
+					"Sink_file": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().Sink_file",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@{toLower(dataset().Sink_path)}",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Ls_MySql_Ingestion')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "MySql",
+				"typeProperties": {
+					"server": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_server')]",
+					"port": 3306,
+					"database": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_database')]",
+					"username": "[parameters('Ls_MySql_Ingestion_properties_typeProperties_username')]",
+					"sslMode": 0,
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Ls_MySql_Ingestion_password')]"
+					},
+					"driverVersion": "v2"
+				},
+				"connectVia": {
+					"referenceName": "SelfHIRShetty",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pl_Incremental_loading')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup1",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select max(LastModified) as Date1 from dbo.Employee_Sink",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "Ds_SqlDb_IL",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Lookup1",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "select * from dbo.Employee_Source \nwhere LastModified > '@{activity('Lookup1').output.firstRow.Date1}'",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Ds_SqlDb_IL",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Pl_Sqlservertoblob')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -287,7 +468,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Sink')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Ds_MySql_Ingestion')]",
@@ -313,40 +496,8 @@
 					}
 				}
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TG_SQLDBtoADLS')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pl_sqldbtoadls",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"SchemaName": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName')]",
-							"TableName": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 60,
-						"startTime": "2025-11-03T12:00:00",
-						"endTime": "2025-11-05T14:00:00",
-						"timeZone": "India Standard Time"
-					}
-				}
-			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_sqldbtoadls')]"
+				"[concat(variables('factoryId'), '/linkedServices/Ls_MySql_Ingestion')]"
 			]
 		},
 		{
@@ -474,6 +625,40 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Ds_MySql_Ingestion')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TG_SQLDBtoADLS')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_sqldbtoadls",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"SchemaName": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_SchemaName')]",
+							"TableName": "[parameters('TG_SQLDBtoADLS_properties_pl_sqldbtoadls_parameters_TableName')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 60,
+						"startTime": "2025-11-03T12:00:00",
+						"endTime": "2025-11-05T14:00:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_sqldbtoadls')]"
 			]
 		}
 	]
